@@ -35,4 +35,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('admin.guest:admin')->get('login', [\App\Http\Controllers\AdminAuthController::class, 'create'])->name('login');
+    Route::post('login', [\App\Http\Controllers\AdminAuthController::class, 'store'])->name('login');
+
+    Route::middleware('admin')->group(function () {
+        Route::post('logout', [\App\Http\Controllers\AdminAuthController::class, 'destroy'])->name('logout');
+        Route::get('/dashboard', function () {
+            return Inertia::render('Admin/Dashboard');
+        })->name('dashboard');
+    });
+});
+
 require __DIR__.'/auth.php';
