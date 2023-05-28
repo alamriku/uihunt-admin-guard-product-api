@@ -1,4 +1,4 @@
-<p align="center">UIHUT</p>
+<p align="center" style="font-weight: bolder;font-size: xxx-large">UIHUT</p>
 
 
 ## About the tasks
